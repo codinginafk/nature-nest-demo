@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nature Nest — Handmade Wax & Candles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* ========== RESET & BASE ========== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green-deep: #2d5a3f;
+  --green-sage: #8fa98f;
+  --green-pale: #d4e0d4;
+  --terracotta: #c17f59;
+  --terracotta-light: #d4a574;
+  --amber: #e8b86d;
+  --cream: #faf7f2;
+  --cream-warm: #f5f0e8;
+  --beige: #e8d5c4;
+  --charcoal: #2d2d2d;
+  --white: #ffffff;
+  --shadow-soft: 0 2px 20px rgba(0,0,0,0.06);
+  --shadow-card: 0 4px 24px rgba(0,0,0,0.08);
+  --shadow-hover: 0 8px 32px rgba(0,0,0,0.12);
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  color: var(--charcoal);
+  background: var(--cream);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ========== TYPOGRAPHY ========== */
+h1, h2, h3, h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 600; line-height: 1.2; }
+h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); letter-spacing: -0.02em; }
+h2 { font-size: clamp(2rem, 4vw, 3.2rem); letter-spacing: -0.01em; }
+h3 { font-size: clamp(1.3rem, 2.5vw, 1.8rem); }
+.accent-text { font-family: 'Cormorant Garamond', 'Georgia', serif; font-style: italic; color: var(--terracotta); }
+
+/* ========== NAVIGATION ========== */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 1.2rem 2rem;
+  transition: var(--transition);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav.scrolled {
+  background: rgba(250, 247, 242, 0.95);
+  backdrop-filter: blur(20px);
+  box-shadow: var(--shadow-soft);
+  padding: 0.8rem 2rem;
+}
+.nav-brand { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 600; color: var(--green-deep); text-decoration: none; letter-spacing: -0.01em; }
+.nav-brand span { color: var(--terracotta); font-style: italic; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a { text-decoration: none; color: var(--charcoal); font-size: 0.9rem; font-weight: 500; transition: var(--transition); position: relative; }
+.nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--terracotta); transition: var(--transition); }
+.nav-links a:hover { color: var(--terracotta); }
+.nav-links a:hover::after { width: 100%; }
+.nav-actions { display: flex; gap: 1rem; align-items: center; }
+.btn-icon { background: none; border: none; cursor: pointer; font-size: 1.2rem; padding: 0.5rem; color: var(--charcoal); transition: var(--transition); }
+.btn-icon:hover { color: var(--terracotta); transform: scale(1.1); }
+.cart-count { position: relative; }
+.user-avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--green-deep); color: var(--white); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: var(--transition); }
+.user-avatar:hover { background: var(--terracotta); transform: scale(1.08); }
+.cart-count::after { content: '0'; position: absolute; top: -2px; right: -6px; background: var(--terracotta); color: white; font-size: 0.65rem; font-weight: 600; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+/* ========== HERO ========== */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  background: linear-gradient(165deg, var(--cream) 0%, var(--cream-warm) 40%, #e8dfd3 100%);
+  position: relative; overflow: hidden;
+   padding: 8rem 2rem 4rem;
+}
+.hero::before {
+  content: ''; position: absolute; top: -20%; right: -10%;
+  width: 60%; height: 120%;
+  background: radial-gradient(ellipse, rgba(193, 127, 89, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.hero::after {
+  content: ''; position: absolute; bottom: -10%; left: -5%;
+  width: 40%; height: 60%;
+  background: radial-gradient(ellipse, rgba(45, 90, 63, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.hero-content { position: relative; z-index: 2; max-width: 600px; }
+.hero-content .tag { display: inline-block; font-size: 0.85rem; font-weight: 500; color: var(--terracotta); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1.5rem; }
+.hero-content h1 { margin-bottom: 1.5rem; color: var(--green-deep); }
+.hero-content p { font-size: 1.15rem; color: #5a5a5a; margin-bottom: 2.5rem; max-width: 480px; }
+.btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; border-radius: 50px; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: var(--transition); border: none; cursor: pointer; font-family: inherit; }
+.btn-primary { background: var(--green-deep); color: var(--white); }
+.btn-primary:hover { background: #234a34; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(45, 90, 63, 0.3); }
+.btn-outline { background: transparent; border: 2px solid var(--green-deep); color: var(--green-deep); }
+.btn-outline:hover { background: var(--green-deep); color: var(--white); transform: translateY(-2px); }
+.btn-amber { background: var(--amber); color: var(--charcoal); }
+.btn-amber:hover { background: #d4a560; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232, 184, 109, 0.4); }
+.hero-visual {
+  position: absolute; right: 5%; top: 50%; transform: translateY(-50%);
+  width: 45%; max-width: 600px; z-index: 1;
+}
+.hero-visual svg { width: 100%; height: auto; opacity: 0.9; }
+.hero-scroll { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 2; animation: float 2s ease-in-out infinite; }
+.hero-scroll span { display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--green-sage); text-align: center; margin-bottom: 0.5rem; }
+@keyframes float { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-8px); } }
+
+/* ========== BRAND STRIP ========== */
+.brand-strip {
+  background: var(--white); padding: 2rem;
+  text-align: center; border-top: 1px solid var(--beige);
+  border-bottom: 1px solid var(--beige);
+}
+.brand-strip p { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--green-sage); font-style: italic; }
+
+/* ========== FEATURED PRODUCTS ========== */
+.featured { padding: 6rem 2rem; max-width: 1400px; margin: 0 auto; }
+.section-header { text-align: center; margin-bottom: 4rem; }
+.section-header .tag { display: inline-block; font-size: 0.8rem; font-weight: 500; color: var(--terracotta); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1rem; }
+.section-header h2 { color: var(--green-deep); margin-bottom: 1rem; }
+.section-header p { color: #777; max-width: 500px; margin: 0 auto; }
+
+.product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+.product-card {
+  background: var(--white); border-radius: var(--radius-lg); overflow: hidden;
+  box-shadow: var(--shadow-card); transition: var(--transition); cursor: pointer;
+  position: relative;
+}
+.product-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
+.product-img {
+  height: 340px; overflow: hidden; position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+.product-img svg { width: 100%; height: 100%; }
+.product-badge { position: absolute; top: 1rem; left: 1rem; background: var(--terracotta); color: var(--white); font-size: 0.75rem; font-weight: 600; padding: 0.4rem 1rem; border-radius: 50px; }
+.product-body { padding: 1.5rem; }
+.product-body h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--charcoal); margin-bottom: 0.3rem; }
+.product-body .desc { color: #888; font-size: 0.9rem; margin-bottom: 1rem; }
+.product-footer { display: flex; align-items: center; justify-content: space-between; }
+.product-price { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 600; color: var(--green-deep); }
+.btn-add { background: var(--cream-warm); border: none; padding: 0.6rem 1.2rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: var(--transition); color: var(--charcoal); }
+.btn-add:hover { background: var(--green-deep); color: var(--white); }
+.product-rating { color: var(--amber); font-size: 0.85rem; display: flex; gap: 0.2rem; margin-top: 0.5rem; }
+
+/* ========== CATEGORY BANNERS ========== */
+.categories { padding: 6rem 2rem; }
+.categories-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1400px; margin: 0 auto; }
+.cat-card {
+  border-radius: var(--radius-lg); overflow: hidden; position: relative;
+  height: 420px; cursor: pointer; transition: var(--transition);
+  box-shadow: var(--shadow-soft);
+}
+.cat-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+.cat-card:hover .cat-overlay { background: rgba(45, 90, 63, 0.45); }
+.cat-card:hover .cat-content { transform: translateY(-8px); }
+.cat-bg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.cat-bg svg { width: 100%; height: 100%; }
+.cat-overlay { position: absolute; inset: 0; background: rgba(45, 90, 63, 0.25); transition: var(--transition); }
+.cat-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 2rem; color: var(--white); z-index: 2; transition: var(--transition); }
+.cat-content h3 { font-size: 1.6rem; margin-bottom: 0.5rem; }
+.cat-content p { font-size: 0.9rem; opacity: 0.9; margin-bottom: 1.2rem; }
+.cat-link { display: inline-block; font-size: 0.85rem; font-weight: 600; border-bottom: 2px solid var(--white); padding-bottom: 4px; }
+
+/* ========== ABOUT ========== */
+.about { padding: 6rem 2rem; background: var(--white); }
+.about-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.about-visual { display: flex; align-items: center; justify-content: center; }
+.about-visual svg { width: 90%; max-width: 500px; }
+.about-text h2 { color: var(--green-deep); margin-bottom: 1.5rem; }
+.about-text p { color: #666; margin-bottom: 1.2rem; font-size: 1.05rem; line-height: 1.8; }
+.about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2rem 0; }
+.about-feature { display: flex; gap: 0.8rem; align-items: flex-start; }
+.about-feature .icon { font-size: 1.5rem; color: var(--terracotta); }
+.about-feature h4 { font-size: 1rem; font-weight: 600; margin-bottom: 0.2rem; }
+.about-feature p { font-size: 0.85rem; color: #888; margin: 0; }
+
+/* ========== TESTIMONIALS ========== */
+.testimonials { padding: 6rem 2rem; background: linear-gradient(180deg, var(--cream) 0%, var(--cream-warm) 100%); }
+.testimonials-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2rem; }
+.testimonial-card {
+  background: var(--white); border-radius: var(--radius-lg); padding: 2rem;
+  box-shadow: var(--shadow-soft); transition: var(--transition);
+  border: 1px solid var(--beige);
+}
+.testimonial-card:hover { box-shadow: var(--shadow-hover); }
+.testimonial-stars { color: var(--amber); font-size: 0.9rem; margin-bottom: 1rem; }
+.testimonial-text { font-style: italic; color: #555; margin-bottom: 1.5rem; line-height: 1.7; }
+.testimonial-author { display: flex; align-items: center; gap: 1rem; }
+.testimonial-author .avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--green-pale); display: flex; align-items: center; justify-content: center; font-weight: 600; color: var(--green-deep); }
+.testimonial-author .name { font-weight: 600; font-size: 0.9rem; }
+.testimonial-author .role { color: #999; font-size: 0.8rem; }
+
+/* ========== NEWSLETTER ========== */
+.newsletter { padding: 6rem 2rem; }
+.newsletter-inner { max-width: 700px; margin: 0 auto; text-align: center; background: var(--green-deep); border-radius: var(--radius-xl); padding: 4rem 3rem; color: var(--white); }
+.newsletter-inner h2 { color: var(--white); margin-bottom: 1rem; }
+.newsletter-inner p { color: var(--green-pale); margin-bottom: 2rem; font-size: 1.05rem; }
+.newsletter-form { display: flex; gap: 0.8rem; max-width: 480px; margin: 0 auto; }
+.newsletter-form input { flex: 1; padding: 1rem 1.5rem; border: 2px solid transparent; border-radius: 50px; font-size: 0.95rem; font-family: inherit; outline: none; transition: var(--transition); }
+.newsletter-form input:focus { border-color: var(--amber); }
+.newsletter-form button { padding: 1rem 2rem; background: var(--amber); color: var(--charcoal); border: none; border-radius: 50px; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: var(--transition); font-family: inherit; }
+.newsletter-form button:hover { background: #d4a560; transform: translateY(-2px); }
+
+/* ========== INSTAGRAM FEED ========== */
+.insta-feed { padding: 2rem 2rem 6rem; text-align: center; }
+.insta-feed .section-header { margin-bottom: 3rem; }
+.insta-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem; max-width: 1400px; margin: 0 auto; }
+.insta-item { aspect-ratio: 1; border-radius: var(--radius-md); overflow: hidden; position: relative; cursor: pointer; transition: var(--transition); }
+.insta-item:hover { transform: scale(1.03); }
+.insta-item:hover .insta-overlay { opacity: 1; }
+.insta-overlay { position: absolute; inset: 0; background: rgba(45, 90, 63, 0.6); display: flex; align-items: center; justify-content: center; opacity: 0; transition: var(--transition); }
+.insta-overlay span { color: white; font-size: 2rem; }
+
+/* ========== FOOTER ========== */
+.footer { background: var(--charcoal); color: var(--cream); padding: 5rem 2rem 2rem; }
+.footer-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+.footer-brand h3 { color: var(--white); font-size: 1.5rem; margin-bottom: 1rem; font-family: 'Playfair Display', serif; }
+.footer-brand h3 span { color: var(--terracotta); font-style: italic; }
+.footer-brand p { color: #aaa; font-size: 0.9rem; line-height: 1.8; }
+.footer-col h4 { color: var(--white); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; font-family: 'Inter', sans-serif; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+.footer-col a { color: #aaa; text-decoration: none; font-size: 0.9rem; transition: var(--transition); }
+.footer-col a:hover { color: var(--terracotta); }
+.footer-bottom { max-width: 1400px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid #444; display: flex; justify-content: space-between; align-items: center; }
+.footer-bottom p { color: #666; font-size: 0.85rem; }
+.footer-social { display: flex; gap: 1rem; }
+.footer-social a { color: #666; font-size: 1.2rem; transition: var(--transition); text-decoration: none; }
+.footer-social a:hover { color: var(--terracotta); }
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hero { padding: 6rem 1.5rem 4rem; flex-direction: column; text-align: center; }
+  .hero-content p { max-width: 100%; }
+  .hero-visual { position: relative; right: auto; top: auto; transform: none; width: 80%; margin: 2rem auto 0; }
+  .categories-grid { grid-template-columns: 1fr; }
+  .about-inner { grid-template-columns: 1fr; }
+  .insta-grid { grid-template-columns: repeat(3, 1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .newsletter-form { flex-direction: column; }
+  .newsletter-inner { padding: 2.5rem 1.5rem; }
+}
+
+/* ========== ANIMATIONS ========== */
+.fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ========== TOAST ========== */
+.toast {
+  position: fixed; bottom: 2rem; right: 2rem;
+  background: var(--green-deep); color: white;
+  padding: 1rem 2rem; border-radius: 50px;
+  font-weight: 500; box-shadow: var(--shadow-hover);
+  z-index: 2000; opacity: 0; transform: translateY(20px);
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ========== NAVIGATION ========== -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-brand">Nature <span>Nest</span></a>
+  <ul class="nav-links">
+    <li><a href="#featured">Shop</a></li>
+    <li><a href="#collections">Collections</a></li>
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="blog/what-is-wax.html">Blog</a></li>
+    <li><a href="https://www.instagram.com/naturenest0001" target="_blank" rel="noopener">📷 Instagram</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-icon" title="Search">🔍</button>
+    <button class="btn-icon cart-count" title="Cart" onclick="showToast('Cart coming soon!')">🛒</button>
+    <div class="user-avatar" title="Demo user — logged in">A</div>
+  </div>
+</nav>
+
+<!-- ========== HERO ========== -->
+<section class="hero" id="home">
+  <div class="hero-content fade-in">
+    <span class="tag">Handmade with love</span>
+    <h1>Nature's warmth,<br>poured by hand.</h1>
+    <p>Handcrafted wax creations — from sculpted flowers to aromatic candles — each piece a quiet celebration of nature's beauty, made in small batches with pure, natural ingredients.</p>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+      <a href="#featured" class="btn btn-primary">Shop Collection →</a>
+      <a href="#about" class="btn btn-outline">Our Story</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="glow1" cx="50%" cy="50%">
+          <stop offset="0%" stop-color="#c17f59" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#c17f59" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <circle cx="250" cy="250" r="220" fill="url(#glow1)"/>
+      <!-- Candle 1 -->
+      <rect x="160" y="80" width="60" height="200" rx="8" fill="#f5f0e8" stroke="#d4a574" stroke-width="2"/>
+      <ellipse cx="190" cy="80" rx="30" ry="8" fill="#e8d5c4"/>
+      <line x1="190" y1="80" x2="190" y2="50" stroke="#c17f59" stroke-width="2"/>
+      <ellipse cx="190" cy="50" rx="8" ry="12" fill="#e8b86d" opacity="0.8"/>
+      <ellipse cx="190" cy="48" rx="4" ry="7" fill="#f5d89a"/>
+      <!-- Drips -->
+      <path d="M163 90 Q162 120 164 140" fill="none" stroke="#e8d5c4" stroke-width="3" opacity="0.7"/>
+      <path d="M217 85 Q219 110 218 130" fill="none" stroke="#e8d5c4" stroke-width="2" opacity="0.5"/>
+
+      <!-- Candle 2 -->
+      <rect x="260" y="120" width="45" height="160" rx="6" fill="#d4e0d4" stroke="#8fa98f" stroke-width="2"/>
+      <ellipse cx="282.5" cy="120" rx="22.5" ry="6" fill="#c0d4c0"/>
+      <line x1="282.5" y1="120" x2="282.5" y2="85" stroke="#2d5a3f" stroke-width="2"/>
+      <ellipse cx="282.5" cy="85" rx="6" ry="10" fill="#e8b86d" opacity="0.8"/>
+
+      <!-- Wax Flower -->
+      <g transform="translate(100, 310)">
+        <circle cx="0" cy="0" r="45" fill="#faf7f2" stroke="#d4a574" stroke-width="1.5"/>
+        <circle cx="35" cy="-20" r="25" fill="#f5f0e8"/>
+        <circle cx="-35" cy="-20" r="25" fill="#f5f0e8"/>
+        <circle cx="0" cy="-45" r="22" fill="#faf7f2"/>
+        <circle cx="35" cy="20" r="25" fill="#f5f0e8"/>
+        <circle cx="-35" cy="20" r="25" fill="#f5f0e8"/>
+        <circle cx="0" cy="0" r="18" fill="#e8b86d" opacity="0.7"/>
+      </g>
+
+      <!-- Rose wax flower -->
+      <g transform="translate(380, 300)">
+        <circle cx="0" cy="0" r="40" fill="#f5e6dc" stroke="#d4a574" stroke-width="1.5"/>
+        <circle cx="22" cy="-15" r="22" fill="#fae8dc"/>
+        <circle cx="-22" cy="-15" r="22" fill="#fae8dc"/>
+        <circle cx="12" cy="22" r="20" fill="#fae8dc"/>
+        <circle cx="-12" cy="22" r="20" fill="#fae8dc"/>
+        <circle cx="0" cy="0" r="16" fill="#e8b86d" opacity="0.8"/>
+        <!-- Petal inner swirls -->
+        <path d="M-8,-8 Q0,-18 8,-8 Q0,-4 -8,-8" fill="#f5d89a" opacity="0.6"/>
+      </g>
+
+      <!-- Small buds -->
+      <g transform="translate(130, 200)">
+        <circle cx="0" cy="0" r="15" fill="#f5f0e8" stroke="#d4a574" stroke-width="1"/>
+        <circle cx="8" cy="-5" r="8" fill="#fae8dc"/>
+        <circle cx="-8" cy="-5" r="8" fill="#fae8dc"/>
+        <circle cx="0" cy="0" r="5" fill="#e8b86d" opacity="0.6"/>
+      </g>
+
+      <g transform="translate(340, 230)">
+        <circle cx="0" cy="0" r="12" fill="#f5f0e8" stroke="#d4a574" stroke-width="1"/>
+        <circle cx="6" cy="-4" r="7" fill="#fae8dc"/>
+        <circle cx="-6" cy="-4" r="7" fill="#fae8dc"/>
+        <circle cx="0" cy="0" r="4" fill="#e8b86d" opacity="0.6"/>
+      </g>
+
+      <!-- Leaves -->
+      <path d="M270 260 Q300 230 320 250 Q290 270 270 260" fill="#8fa98f" opacity="0.5"/>
+      <path d="M220 290 Q250 270 260 290 Q240 310 220 290" fill="#8fa98f" opacity="0.5"/>
+    </svg>
+  </div>
+
+  <div class="hero-scroll"><span>Scroll</span><div style="font-size:1.2rem;color:var(--green-sage);text-align:center;">↓</div></div>
+</section>
+
+<!-- ========== BRAND STRIP ========== -->
+<div class="brand-strip">
+  <p>✦ Small-batch handmade wax &nbsp;·&nbsp; Pure botanical ingredients &nbsp;·&nbsp; Sustainably crafted &nbsp;·&nbsp; Free shipping over $75 ✦</p>
+</div>
+
+<!-- ========== FEATURED PRODUCTS ========== -->
+<section class="featured" id="featured">
+  <div class="section-header fade-in">
+    <span class="tag">Our Favorites</span>
+    <h2>Handcrafted for you</h2>
+    <p>Every piece is poured, shaped, and finished by hand in our studio. No two are exactly alike — and that's the beauty of it.</p>
+  </div>
+
+  <div class="product-grid">
+    <!-- Product 1 -->
+    <a href="products/botanical-bliss-trio.html" style="text-decoration:none;color:inherit;display:block;"><div class="product-card fade-in">
+      <div class="product-img">
+        <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg">
+          <defs><radialGradient id="bg1" cx="50%" cy="50%"><stop offset="0%" stop-color="#f5f0e8"/><stop offset="100%" stop-color="#e8d5c4"/></radialGradient></defs>
+          <rect width="400" height="340" fill="url(#bg1)"/>
+          <!-- Large candle -->
+          <rect x="120" y="40" width="70" height="220" rx="10" fill="#faf7f2" stroke="#c17f59" stroke-width="2"/>
+          <ellipse cx="155" cy="40" rx="35" ry="10" fill="#f5e6dc"/>
+          <line x1="155" y1="40" x2="155" y2="10" stroke="#c17f59" stroke-width="2"/>
+          <ellipse cx="155" cy="10" rx="6" ry="10" fill="#e8b86d" opacity="0.9"/>
+          <!-- Side candle -->
+          <rect x="220" y="80" width="50" height="180" rx="8" fill="#d4e0d4" stroke="#8fa98f" stroke-width="2"/>
+          <ellipse cx="245" cy="80" rx="25" ry="8" fill="#c0d4c0"/>
+          <line x1="245" y1="80" x2="245" y2="50" stroke="#2d5a3f" stroke-width="2"/>
+          <ellipse cx="245" cy="50" rx="5" ry="8" fill="#e8b86d" opacity="0.8"/>
+          <!-- Wax flower -->
+          <g transform="translate(340, 290)">
+            <circle cx="0" cy="-10" r="25" fill="#faf7f2" stroke="#d4a574" stroke-width="1"/>
+            <circle cx="20" cy="-20" r="18" fill="#f5f0e8"/>
+            <circle cx="-20" cy="-20" r="18" fill="#f5f0e8"/>
+            <circle cx="20" cy="5" r="18" fill="#f5f0e8"/>
+            <circle cx="-20" cy="5" r="18" fill="#f5f0e8"/>
+            <circle cx="0" cy="-10" r="10" fill="#e8b86d" opacity="0.7"/>
+          </g>
+          <text x="80" y="310" font-family="'Cormorant Garamond',serif" font-size="18" font-style="italic" fill="#c17f59" opacity="0.6">ø</text>
+        </svg>
+        <span class="product-badge">Bestseller</span>
+      </div>
+      <div class="product-body">
+        <h3>Botanical Bliss Trio</h3>
+        <div class="product-rating">★★★★★ <span style="color:#999;font-weight:400;">(124)</span></div>
+        <p class="desc">Three hand-poured soy wax candles infused with lavender, rosemary & eucalyptus essential oils.</p>
+        <div class="product-footer">
+          <span class="product-price">48.00 AED</span>
+          <button class="btn-add" onclick="event.preventDefault();showToast('Added Botanical Bliss Trio to cart!')">Add to Cart</button>
+        </div>
+      </div>
+    </div></a>
+
+    <!-- Product 2 -->
+    <a href="products/wax-rose-bouquet.html" style="text-decoration:none;color:inherit;display:block;"><div class="product-card fade-in">
+      <div class="product-img">
+        <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="340" fill="#f5e6dc"/>
+          <!-- Rose center -->
+          <circle cx="200" cy="160" r="80" fill="#fae8dc" stroke="#d4a574" stroke-width="2"/>
+          <circle cx="200" cy="160" r="55" fill="#f5d5c5" stroke="#d4a574" stroke-width="1.5"/>
+          <circle cx="200" cy="160" r="35" fill="#f0c5b0" stroke="#d4a574" stroke-width="1"/>
+          <circle cx="200" cy="160" r="18" fill="#e8b86d" opacity="0.7"/>
+          <!-- Petals radiating -->
+          <circle cx="270" cy="130" r="35" fill="#fae8dc" stroke="#d4a574" stroke-width="1"/>
+          <circle cx="260" cy="200" r="35" fill="#fae8dc" stroke="#d4a574" stroke-width="1"/>
+          <circle cx="140" cy="130" r="35" fill="#fae8dc" stroke="#d4a574" stroke-width="1"/>
+          <circle cx="140" cy="200" r="35" fill="#fae8dc" stroke="#d4a574" stroke-width="1"/>
+          <circle cx="200" cy="80" r="30" fill="#fae8dc" stroke="#d4a574" stroke-width="1"/>
+          <circle cx="200" cy="240" r="30" fill="#fae8dc" stroke="#d4a574" stroke-width="1"/>
+          <!-- Leaves -->
+          <path d="M120 110 Q90 80 70 100 Q90 120 120 110" fill="#8fa98f" opacity="0.6"/>
+          <path d="M280 110 Q310 80 330 100 Q310 120 280 110" fill="#8fa98f" opacity="0.6"/>
+          <text x="120" y="310" font-family="'Cormorant Garamond',serif" font-size="18" font-style="italic" fill="#c17f59" opacity="0.6">✿</text>
+        </svg>
+        <span class="product-badge" style="background:var(--green-deep);">New</span>
+      </div>
+      <div class="product-body">
+        <h3>Wax Rose Bouquet</h3>
+        <div class="product-rating">★★★★★ <span style="color:#999;font-weight:400;">(89)</span></div>
+        <p class="desc">Lifelike hand-sculpted wax roses — a forever bouquet that fills any room with a subtle floral fragrance.</p>
+        <div class="product-footer">
+          <span class="product-price">95.00 AED</span>
+          <button class="btn-add" onclick="event.preventDefault();showToast('Added Wax Rose Bouquet to cart!')">Add to Cart</button>
+        </div>
+      </div>
+    </div></a>
+
+    <!-- Product 3 -->
+    <a href="products/calm-collection-set.html" style="text-decoration:none;color:inherit;display:block;"><div class="product-card fade-in">
+      <div class="product-img">
+        <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="340" fill="#d4e0d4"/>
+          <!-- Candle jar -->
+          <rect x="130" y="40" width="80" height="120" rx="12" fill="#faf7f2" opacity="0.9" stroke="#8fa98f" stroke-width="2"/>
+          <rect x="125" y="35" width="90" height="15" rx="6" fill="#c0d4c0"/>
+          <line x1="170" y1="35" x2="170" y2="8" stroke="#2d5a3f" stroke-width="2"/>
+          <ellipse cx="170" cy="8" rx="5" ry="9" fill="#e8b86d" opacity="0.85"/>
+          <!-- Second jar -->
+          <rect x="230" y="80" width="60" height="90" rx="10" fill="#f5e6dc" opacity="0.9" stroke="#c17f59" stroke-width="2"/>
+          <rect x="226" y="76" width="68" height="12" rx="5" fill="#d4a574"/>
+          <line x1="260" y1="76" x2="260" y2="50" stroke="#c17f59" stroke-width="2"/>
+          <ellipse cx="260" cy="50" rx="4" ry="7" fill="#e8b86d" opacity="0.8"/>
+          <!-- Dried flowers -->
+          <path d="M80 290 Q120 250 140 280" fill="none" stroke="#c17f59" stroke-width="2" opacity="0.6"/>
+          <path d="M100 295 Q130 260 160 285" fill="none" stroke="#d4a574" stroke-width="1.5" opacity="0.5"/>
+          <circle cx="140" cy="275" r="6" fill="#e8b86d" opacity="0.5"/>
+          <circle cx="155" cy="278" r="5" fill="#d4a574" opacity="0.5"/>
+          <circle cx="120" cy="280" r="5" fill="#c17f59" opacity="0.4"/>
+          <text x="300" y="310" font-family="'Cormorant Garamond',serif" font-size="18" font-style="italic" fill="#2d5a3f" opacity="0.5">⌂</text>
+        </svg>
+      </div>
+      <div class="product-body">
+        <h3>Calm Collection Set</h3>
+        <div class="product-rating">★★★★☆ <span style="color:#999;font-weight:400;">(67)</span></div>
+        <p class="desc">Two jar candles — soothing chamomile & warm vanilla — with a dried flower garnish set.</p>
+        <div class="product-footer">
+          <span class="product-price">65.00 AED</span>
+          <button class="btn-add" onclick="event.preventDefault();showToast('Added Calm Collection to cart!')">Add to Cart</button>
+        </div>
+      </div>
+    </div></a>
+
+    <!-- Product 4 -->
+    <a href="products/diy-wax-flower-kit.html" style="text-decoration:none;color:inherit;display:block;"><div class="product-card fade-in">
+      <div class="product-img">
+        <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="340" fill="#faf7f2"/>
+          <!-- Wax flower arrangement - multiple small flowers -->
+          <g opacity="0.9">
+            <circle cx="200" cy="150" r="70" fill="#fae8dc" stroke="#d4a574" stroke-width="1.5"/>
+            <circle cx="160" cy="120" r="30" fill="#f5f0e8" stroke="#d4a574" stroke-width="1"/>
+            <circle cx="240" cy="120" r="30" fill="#f5e6dc" stroke="#d4a574" stroke-width="1"/>
+            <circle cx="160" cy="180" r="28" fill="#f5e6dc" stroke="#d4a574" stroke-width="1"/>
+            <circle cx="240" cy="180" r="28" fill="#f5f0e8" stroke="#d4a574" stroke-width="1"/>
+            <circle cx="200" cy="100" r="25" fill="#fae8dc" stroke="#d4a574" stroke-width="1"/>
+            <!-- Centers -->
+            <circle cx="200" cy="150" r="15" fill="#e8b86d" opacity="0.7"/>
+            <circle cx="160" cy="120" r="8" fill="#e8b86d" opacity="0.5"/>
+            <circle cx="240" cy="120" r="8" fill="#e8b86d" opacity="0.5"/>
+            <circle cx="160" cy="180" r="7" fill="#d4a574" opacity="0.5"/>
+            <circle cx="240" cy="180" r="7" fill="#e8b86d" opacity="0.5"/>
+            <circle cx="200" cy="100" r="7" fill="#d4a574" opacity="0.5"/>
+          </g>
+          <!-- Leaves / stems -->
+          <path d="M200 220 Q180 260 160 300" fill="none" stroke="#8fa98f" stroke-width="2.5" opacity="0.7"/>
+          <path d="M200 220 Q220 260 240 300" fill="none" stroke="#8fa98f" stroke-width="2.5" opacity="0.7"/>
+          <ellipse cx="155" cy="270" rx="20" ry="8" fill="#8fa98f" opacity="0.5" transform="rotate(-20,155,270)"/>
+          <ellipse cx="245" cy="270" rx="20" ry="8" fill="#8fa98f" opacity="0.5" transform="rotate(20,245,270)"/>
+          <text x="310" y="310" font-family="'Cormorant Garamond',serif" font-size="18" fill="#c17f59" opacity="0.4">✦</text>
+        </svg>
+        <span class="product-badge" style="background:var(--amber);color:var(--charcoal);">Limited</span>
+      </div>
+      <div class="product-body">
+        <h3>DIY Wax Flower Kit</h3>
+        <div class="product-rating">★★★★★ <span style="color:#999;font-weight:400;">(203)</span></div>
+        <p class="desc">Everything you need to craft your own wax flowers — premium wax sheets, tools, molds & guide booklet.</p>
+        <div class="product-footer">
+          <span class="product-price">120.00 AED</span>
+          <button class="btn-add" onclick="event.preventDefault();showToast('Added DIY Kit to cart!')">Add to Cart</button>
+        </div>
+      </div>
+    </div></a>
+  </div>
+
+  <div style="text-align:center;margin-top:3rem;">
+    <a href="#" class="btn btn-amber" onclick="showToast('Full catalog coming soon!');return false;">View All Products →</a>
+  </div>
+</section>
+
+<!-- ========== CATEGORY BANNERS ========== -->
+<section class="categories" id="collections">
+  <div class="section-header fade-in">
+    <span class="tag">Shop by Category</span>
+    <h2>Find your scent</h2>
+    <p>Each category is a doorway into a world of handcrafted warmth and beauty.</p>
+  </div>
+
+  <div class="categories-grid">
+    <!-- Candles -->
+    <div class="cat-card fade-in">
+      <div class="cat-bg">
+        <svg viewBox="0 0 500 420" xmlns="http://www.w3.org/2000/svg">
+          <rect width="500" height="420" fill="#3a5a40"/>
+          <rect x="150" y="60" width="60" height="260" rx="8" fill="#f5f0e8" opacity="0.9"/>
+          <ellipse cx="180" cy="60" rx="30" ry="8" fill="#e8d5c4"/>
+          <line x1="180" y1="60" x2="180" y2="30" stroke="#e8b86d" stroke-width="2"/>
+          <ellipse cx="180" cy="30" rx="7" ry="11" fill="#e8b86d" opacity="0.9"/>
+          <rect x="270" y="100" width="45" height="200" rx="6" fill="#f5e6dc" opacity="0.9"/>
+          <ellipse cx="292.5" cy="100" rx="22.5" ry="7" fill="#d4a574"/>
+          <line x1="292.5" y1="100" x2="292.5" y2="65" stroke="#e8b86d" stroke-width="2"/>
+          <ellipse cx="292.5" cy="65" rx="5" ry="9" fill="#e8b86d" opacity="0.8"/>
+          <circle cx="350" cy="200" r="50" fill="#8fa98f" opacity="0.3"/>
+        </svg>
+      </div>
+      <div class="cat-overlay"></div>
+      <div class="cat-content">
+        <h3>Hand-Poured Candles</h3>
+        <p>Soy & beeswax candles infused with pure essential oils. Long-burning, clean, naturally fragrant.</p>
+        <a href="products/botanical-bliss-trio.html" style="color:white;"><span class="cat-link">Shop Candles →</span></a>
+      </div>
+    </div>
+
+    <!-- Wax Flowers -->
+    <div class="cat-card fade-in">
+      <div class="cat-bg">
+        <svg viewBox="0 0 500 420" xmlns="http://www.w3.org/2000/svg">
+          <rect width="500" height="420" fill="#c17f59"/>
+          <circle cx="250" cy="200" r="120" fill="#fae8dc" opacity="0.8" stroke="#f5f0e8" stroke-width="3"/>
+          <circle cx="190" cy="160" r="45" fill="#f5f0e8" opacity="0.85"/>
+          <circle cx="310" cy="160" r="45" fill="#f5f0e8" opacity="0.85"/>
+          <circle cx="190" cy="240" r="45" fill="#f5f0e8" opacity="0.85"/>
+          <circle cx="310" cy="240" r="45" fill="#f5f0e8" opacity="0.85"/>
+          <circle cx="250" cy="200" r="35" fill="#e8b86d" opacity="0.7"/>
+          <circle cx="250" cy="120" r="40" fill="#f5f0e8" opacity="0.85"/>
+          <circle cx="250" cy="280" r="40" fill="#f5f0e8" opacity="0.85"/>
+        </svg>
+      </div>
+      <div class="cat-overlay"></div>
+      <div class="cat-content">
+        <h3>Wax Flowers</h3>
+        <p>Forever-blooming hand-sculpted flowers. Roses, peonies, and wild bouquets that never wilt.</p>
+        <a href="products/wax-rose-bouquet.html" style="color:white;"><span class="cat-link">Shop Flowers →</span></a>
+      </div>
+    </div>
+
+    <!-- DIY & Supplies -->
+    <div class="cat-card fade-in">
+      <div class="cat-bg">
+        <svg viewBox="0 0 500 420" xmlns="http://www.w3.org/2000/svg">
+          <rect width="500" height="420" fill="#8fa98f"/>
+          <rect x="100" y="120" width="80" height="180" rx="8" fill="#f5f0e8" opacity="0.85"/>
+          <rect x="90" y="110" width="100" height="12" rx="4" fill="#c0d4c0"/>
+          <rect x="220" y="150" width="70" height="140" rx="6" fill="#fae8dc" opacity="0.85"/>
+          <rect x="212" y="142" width="86" height="10" rx="3" fill="#d4a574"/>
+          <rect x="320" y="180" width="55" height="100" rx="5" fill="#faf7f2" opacity="0.85"/>
+          <rect x="314" y="174" width="67" height="8" rx="3" fill="#e8d5c4"/>
+          <text x="180" y="85" font-family="'Cormorant Garamond',serif" font-size="24" fill="#d4a574" opacity="0.5">📦</text>
+        </svg>
+      </div>
+      <div class="cat-overlay"></div>
+      <div class="cat-content">
+        <h3>DIY Kits &amp; Supplies</h3>
+        <p>Premium wax, wicks, molds, scents — everything to craft your own candles and wax art at home.</p>
+        <a href="products/diy-wax-flower-kit.html" style="color:white;"><span class="cat-link">Shop Supplies →</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== BLOG TEASER ========== -->
+<section style="padding:6rem 2rem;background:var(--white);">
+  <div class="section-header fade-in">
+    <span class="tag">Nature Nest Journal</span>
+    <h2>From Our Studio</h2>
+    <p>Stories, guides, and the craft behind every candle.</p>
+  </div>
+  <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;">
+    <a href="blog/what-is-wax.html" style="text-decoration:none;color:inherit;"><div class="product-card fade-in"><div class="product-img" style="background:linear-gradient(135deg,#f5f0e8,#e8d5c4);"><svg viewBox="0 0 400 280"><rect width="400" height="280" fill="none"/><rect x="140" y="60" width="60" height="140" rx="8" fill="#faf7f2" stroke="#d4a574" stroke-width="2"/><rect x="220" y="90" width="45" height="110" rx="6" fill="#d4e0d4" stroke="#8fa98f" stroke-width="2"/><text x="200" y="250" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="18" fill="#c17f59" opacity="0.5">What is Wax?</text></svg></div><div class="product-body"><h3>What is Wax? A Complete Guide</h3><p class="desc">Explore the world of wax — from beeswax to soy, and everything in between.</p><span style="color:var(--terracotta);font-weight:600;font-size:0.85rem;">Read Article →</span></div></div></a>
+    <a href="blog/scented-candles-guide.html" style="text-decoration:none;color:inherit;"><div class="product-card fade-in"><div class="product-img" style="background:linear-gradient(135deg,#d4e0d4,#c0d4c0);"><svg viewBox="0 0 400 280"><rect width="400" height="280" fill="none"/><rect x="130" y="50" width="50" height="150" rx="8" fill="#f5f0e8" stroke="#8fa98f" stroke-width="2"/><ellipse cx="155" cy="50" rx="25" ry="7" fill="#d4e0d4"/><circle cx="155" cy="20" r="25" fill="#e8b86d" opacity="0.12"/><text x="200" y="250" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="18" fill="#2d5a3f" opacity="0.5">Scented Candles</text></svg></div><div class="product-body"><h3>The Scented Candle Guide</h3><p class="desc">How fragrances work, what to look for, and choosing the right scent.</p><span style="color:var(--terracotta);font-weight:600;font-size:0.85rem;">Read Article →</span></div></div></a>
+    <a href="blog/how-candles-are-made.html" style="text-decoration:none;color:inherit;"><div class="product-card fade-in"><div class="product-img" style="background:linear-gradient(135deg,#fae8dc,#f5d5c5);"><svg viewBox="0 0 400 280"><rect width="400" height="280" fill="none"/><rect x="80" y="70" width="50" height="120" rx="6" fill="#f5f0e8" stroke="#d4a574" stroke-width="1.5"/><rect x="155" y="50" width="55" height="130" rx="7" fill="#fae8dc" stroke="#d4a574" stroke-width="2"/><rect x="235" y="80" width="45" height="100" rx="5" fill="#d4e0d4" stroke="#8fa98f" stroke-width="1.5"/><text x="200" y="250" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="18" fill="#c17f59" opacity="0.5">The Craft</text></svg></div><div class="product-body"><h3>How Candles Are Made</h3><p class="desc">Step-by-step from raw wax to the finished candle in your hands.</p><span style="color:var(--terracotta);font-weight:600;font-size:0.85rem;">Read Article →</span></div></div></a>
+  </div>
+  <div style="text-align:center;margin-top:2rem;"><a href="blog/what-is-wax.html" class="btn btn-outline">View All Articles →</a></div>
+</section>
+
+<!-- ========== ABOUT ========== -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-visual fade-in">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="200" cy="200" r="180" fill="#f5f0e8" stroke="#d4a574" stroke-width="1.5"/>
+        <circle cx="200" cy="200" r="140" fill="#fae8dc" stroke="#d4a574" stroke-width="1"/>
+        <circle cx="200" cy="200" r="100" fill="#faf7f2" stroke="#d4a574" stroke-width="0.8"/>
+        <!-- Wax flowers in center -->
+        <circle cx="200" cy="200" r="40" fill="#e8b86d" opacity="0.6"/>
+        <circle cx="180" cy="175" r="25" fill="#f5f0e8" stroke="#d4a574" stroke-width="1"/>
+        <circle cx="220" cy="175" r="25" fill="#f5f0e8" stroke="#d4a574" stroke-width="1"/>
+        <circle cx="180" cy="220" r="25" fill="#f5f0e8" stroke="#d4a574" stroke-width="1"/>
+        <circle cx="220" cy="220" r="25" fill="#f5f0e8" stroke="#d4a574" stroke-width="1"/>
+        <circle cx="200" cy="200" r="12" fill="#c17f59" opacity="0.5"/>
+        <!-- Leaves -->
+        <path d="M80 200 Q120 160 140 190" fill="none" stroke="#8fa98f" stroke-width="2.5" opacity="0.5"/>
+        <path d="M320 200 Q280 160 260 190" fill="none" stroke="#8fa98f" stroke-width="2.5" opacity="0.5"/>
+        <path d="M85 210 Q115 240 145 215" fill="none" stroke="#8fa98f" stroke-width="2" opacity="0.4"/>
+        <path d="M315 210 Q285 240 255 215" fill="none" stroke="#8fa98f" stroke-width="2" opacity="0.4"/>
+      </svg>
+    </div>
+    <div class="about-text fade-in">
+      <span class="tag" style="font-size:0.8rem;font-weight:500;color:var(--terracotta);letter-spacing:0.15em;text-transform:uppercase;">Our Story</span>
+      <h2>Born from a love of nature's quiet moments.</h2>
+      <p>Nature Nest began in a small kitchen studio in Dubai, with one simple belief: that a candle should do more than just burn. It should transport you. Every piece we make — from sculpted wax flowers to hand-poured aromatherapy candles — carries the signature of a real person who cared enough to make it.</p>
+      <p>We use only pure soy wax, natural beeswax, botanical essential oils, and lead-free cotton wicks. No paraffin. No synthetic fragrances. No shortcuts.</p>
+      <div class="about-features">
+        <div class="about-feature">
+          <span class="icon">🌿</span>
+          <div><h4>100% Natural</h4><p>Pure soy & beeswax, botanical oils</p></div>
+        </div>
+        <div class="about-feature">
+          <span class="icon">🤲</span>
+          <div><h4>Handcrafted</h4><p>Every piece poured & shaped by hand</p></div>
+        </div>
+        <div class="about-feature">
+          <span class="icon">♻️</span>
+          <div><h4>Sustainable</h4><p>Eco-friendly packaging, minimal waste</p></div>
+        </div>
+        <div class="about-feature">
+          <span class="icon">🇦🇪</span>
+          <div><h4>Made in UAE</h4><p>Crafted locally in Dubai</p></div>
+        </div>
+      </div>
+      <a href="#" class="btn btn-primary" onclick="showToast('Full story coming soon!');return false;">Read Our Full Story →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TESTIMONIALS ========== -->
+<section class="testimonials" id="reviews">
+  <div class="section-header fade-in">
+    <span class="tag">Loved by customers</span>
+    <h2>What people are saying</h2>
+    <p>Real reviews from real people who brought a piece of nature into their homes.</p>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card fade-in">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"The wax rose bouquet arrived beautifully packaged. It looks so real that guests keep touching it to check! It fills my living room with the most delicate floral scent. I've ordered three more as gifts."</p>
+      <div class="testimonial-author">
+        <div class="avatar">F</div>
+        <div><div class="name">Fatima A.</div><div class="role">Verified Buyer · Dubai</div></div>
+      </div>
+    </div>
+    <div class="testimonial-card fade-in">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"Finally found candles that don't give me headaches! The lavender one burns so clean and the scent is natural — not that artificial chemical smell you get from store candles. Will be a regular."</p>
+      <div class="testimonial-author">
+        <div class="avatar">S</div>
+        <div><div class="name">Sarah M.</div><div class="role">Verified Buyer · Abu Dhabi</div></div>
+      </div>
+    </div>
+    <div class="testimonial-card fade-in">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"I bought the DIY wax flower kit for a weekend project with my daughter and we had the BEST time. Instructions were clear, materials were generous, and the results were genuinely beautiful."</p>
+      <div class="testimonial-author">
+        <div class="avatar">R</div>
+        <div><div class="name">Reem K.</div><div class="role">Verified Buyer · Sharjah</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== INSTAGRAM FEED TEASER ========== -->
+<section class="insta-feed" id="gallery">
+  <div class="section-header fade-in">
+    <span class="tag">Follow Along</span>
+    <h2>@naturenest0001</h2>
+    <p>Behind the scenes, new drops, and candle-making magic on Instagram.</p>
+  </div>
+  <div class="insta-grid">
+    <div class="insta-item fade-in" style="background:linear-gradient(135deg,#e8d5c4,#f5e6dc);display:flex;align-items:center;justify-content:center;font-size:2rem;">🕯️<div class="insta-overlay"><span>♥</span></div></div>
+    <div class="insta-item fade-in" style="background:linear-gradient(135deg,#d4e0d4,#c0d4c0);display:flex;align-items:center;justify-content:center;font-size:2rem;">🌸<div class="insta-overlay"><span>♥</span></div></div>
+    <div class="insta-item fade-in" style="background:linear-gradient(135deg,#f5f0e8,#e8d5c4);display:flex;align-items:center;justify-content:center;font-size:2rem;">✨<div class="insta-overlay"><span>♥</span></div></div>
+    <div class="insta-item fade-in" style="background:linear-gradient(135deg,#fae8dc,#d4a574);display:flex;align-items:center;justify-content:center;font-size:2rem;">🌿<div class="insta-overlay"><span>♥</span></div></div>
+    <div class="insta-item fade-in" style="background:linear-gradient(135deg,#d4e0d4,#8fa98f);display:flex;align-items:center;justify-content:center;font-size:2rem;">🎁<div class="insta-overlay"><span>♥</span></div></div>
+    <div class="insta-item fade-in" style="background:linear-gradient(135deg,#f5e6dc,#c17f59);display:flex;align-items:center;justify-content:center;font-size:2rem;">💛<div class="insta-overlay"><span>♥</span></div></div>
+  </div>
+</section>
+
+<!-- ========== NEWSLETTER ========== -->
+<section class="newsletter" id="contact">
+  <div class="newsletter-inner fade-in">
+    <h2>Stay in the glow</h2>
+    <p>New drops, seasonal scents, and exclusive offers — delivered to your inbox. No spam, just warmth.</p>
+    <form class="newsletter-form" onsubmit="event.preventDefault();showToast('Subscribed! Thank you 🌿');">
+      <input type="email" placeholder="Your email address" required>
+      <button type="submit">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h3>Nature <span>Nest</span></h3>
+      <p>Handcrafted wax creations, made in small batches with pure, natural ingredients. Every piece tells a story of warmth, care, and the quiet beauty of nature.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="#">Candles</a></li>
+        <li><a href="#">Wax Flowers</a></li>
+        <li><a href="#">DIY Kits</a></li>
+        <li><a href="#">Gift Sets</a></li>
+        <li><a href="#">New Arrivals</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Help</h4>
+      <ul>
+        <li><a href="#">Shipping & Returns</a></li>
+        <li><a href="#">Candle Care Guide</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">Our Story</a></li>
+        <li><a href="#">Sustainability</a></li>
+        <li><a href="#">Wholesale</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Nature Nest. All rights reserved. Handcrafted in Dubai, UAE.</p>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/naturenest0001" title="Instagram">📷</a>
+      <a href="#" title="Pinterest">📌</a>
+      <a href="#" title="TikTok">🎵</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ========== TOAST ========== -->
+<div class="toast" id="toast"></div>
+
+<!-- ========== SCRIPTS ========== -->
+<script>
+// Sticky nav on scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+});
+
+// Scroll-triggered fade-in animation
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Toast notification
+let toastTimer;
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+// Smooth header scroll offset
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>

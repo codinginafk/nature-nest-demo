@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wax Rose Bouquet — Nature Nest</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.product-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; max-width: 1200px; margin: 0 auto; padding: 2rem; align-items: center; }
+.product-gallery { background: linear-gradient(135deg, #fae8dc, #f5d5c5); border-radius: var(--radius-xl); padding: 3rem; display: flex; align-items: center; justify-content: center; min-height: 450px; }
+.product-info h1 { margin-bottom: 0.5rem; }
+.product-info .price { font-size: 2rem; color: var(--green-deep); font-family: 'Playfair Display', serif; font-weight: 600; margin: 1rem 0; }
+.product-info .desc { font-size: 1.1rem; color: #555; line-height: 1.8; margin-bottom: 1.5rem; }
+.product-meta { display: flex; gap: 2rem; margin: 1.5rem 0; flex-wrap: wrap; }
+.product-meta-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: #666; }
+.product-meta-item .icon { font-size: 1.2rem; }
+.specs { background: var(--white); border-radius: var(--radius-lg); padding: 2rem; margin: 2rem 0; box-shadow: var(--shadow-soft); }
+.specs h3 { color: var(--green-deep); margin-bottom: 1rem; }
+.specs ul { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+.specs li { font-size: 0.9rem; color: #555; padding-left: 1.2rem; position: relative; }
+.specs li::before { content: '🌸'; position: absolute; left: -0.2rem; }
+.related { max-width: 1200px; margin: 4rem auto; padding: 0 2rem; }
+.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+@media (max-width: 768px) { .product-hero { grid-template-columns: 1fr; } .specs ul { grid-template-columns: 1fr; } .related-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="../index.html" class="nav-brand">Nature <span>Nest</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../index.html#featured">Shop</a></li>
+    <li><a href="../blog/what-is-wax.html">Blog</a></li>
+    <li><a href="https://www.instagram.com/naturenest0001" target="_blank" rel="noopener">📷 Instagram</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-icon">🔍</button>
+    <button class="btn-icon cart-count" onclick="toast('Cart coming soon!')">🛒</button>
+    <div class="user-avatar">A</div>
+  </div>
+</nav>
+
+<div class="page-content">
+  <div class="breadcrumbs"><a href="../index.html">Home</a> / <a href="../index.html#featured">Shop</a> / <span>Wax Rose Bouquet</span></div>
+
+  <div class="product-hero">
+    <div class="product-gallery fade-in">
+      <svg viewBox="0 0 450 400" xmlns="http://www.w3.org/2000/svg">
+        <rect width="450" height="400" fill="url(#bg)" rx="20"/>
+        <defs><radialGradient id="bg" cx="50%" cy="50%"><stop offset="0%" stop-color="#fae8dc"/><stop offset="100%" stop-color="#f5d5c5"/></radialGradient></defs>
+        <circle cx="220" cy="185" r="90" fill="#f5e6dc" stroke="#d4a574" stroke-width="2.5"/>
+        <circle cx="220" cy="185" r="60" fill="#fae8dc" stroke="#d4a574" stroke-width="2"/>
+        <circle cx="220" cy="185" r="35" fill="#f5d5c5"/>
+        <circle cx="220" cy="185" r="16" fill="#e8b86d" opacity="0.8"/>
+        <circle cx="280" cy="150" r="38" fill="#fae8dc" stroke="#d4a574" stroke-width="1.5"/>
+        <circle cx="160" cy="150" r="38" fill="#fae8dc" stroke="#d4a574" stroke-width="1.5"/>
+        <circle cx="260" cy="230" r="35" fill="#f5e6dc" stroke="#d4a574" stroke-width="1.5"/>
+        <circle cx="180" cy="230" r="35" fill="#f5e6dc" stroke="#d4a574" stroke-width="1.5"/>
+        <circle cx="220" cy="115" r="32" fill="#f5e6dc" stroke="#d4a574" stroke-width="1.5"/>
+        <circle cx="220" cy="255" r="32" fill="#f5e6dc" stroke="#d4a574" stroke-width="1.5"/>
+        <path d="M160 250 Q130 310 100 350" fill="none" stroke="#8fa98f" stroke-width="3" opacity="0.6"/>
+        <path d="M280 250 Q310 310 340 350" fill="none" stroke="#8fa98f" stroke-width="3" opacity="0.6"/>
+        <ellipse cx="95" cy="330" rx="22" ry="10" fill="#8fa98f" opacity="0.5" transform="rotate(-30,95,330)"/>
+        <ellipse cx="345" cy="330" rx="22" ry="10" fill="#8fa98f" opacity="0.5" transform="rotate(30,345,330)"/>
+      </svg>
+    </div>
+    <div class="product-info fade-in">
+      <span class="tag" style="font-size:0.8rem;color:var(--terracotta);text-transform:uppercase;letter-spacing:0.1em;font-weight:500;">New Arrival</span>
+      <h1>Wax Rose Bouquet</h1>
+      <div class="product-rating" style="font-size:0.9rem;">★★★★★ <span style="color:#999;font-weight:400;">(89 reviews)</span></div>
+      <div class="price">95.00 AED</div>
+      <p class="desc">A forever bouquet of hand-sculpted wax roses that look and feel remarkably real. Each petal is individually shaped from premium botanical wax, infused with a delicate rose fragrance. No watering, no wilting — just timeless beauty for your home, office, or as an unforgettable gift.</p>
+
+      <div class="product-meta">
+        <div class="product-meta-item"><span class="icon">🌸</span> 7 hand-sculpted roses</div>
+        <div class="product-meta-item"><span class="icon">📏</span> 30cm arrangement</div>
+        <div class="product-meta-item"><span class="icon">🌿</span> Botanical wax blend</div>
+        <div class="product-meta-item"><span class="icon">🎁</span> Gift box included</div>
+      </div>
+
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <button class="btn btn-primary" onclick="toast('Added Wax Rose Bouquet to cart! 🌸')">Add to Cart</button>
+        <button class="btn btn-outline" onclick="toast('Saved to wishlist! ♥')">♡ Wishlist</button>
+      </div>
+
+      <div class="specs">
+        <h3>Product Details</h3>
+        <ul>
+          <li>7 individually hand-sculpted wax roses</li>
+          <li>Realistic petal texture — guests touch to check!</li>
+          <li>Delicate rose essential oil infusion</li>
+          <li>Artificial stems with natural-look leaves</li>
+          <li>Arrives in a kraft gift box with ribbon</li>
+          <li>Lasts indefinitely — no maintenance needed</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="related">
+    <div class="section-header"><span class="tag">You May Also Like</span><h2>Related Products</h2></div>
+    <div class="related-grid">
+      <a href="botanical-bliss-trio.html" style="text-decoration:none;color:inherit;"><div class="product-card"><div class="product-img"><svg viewBox="0 0 400 280"><rect width="400" height="280" fill="#f5f0e8"/><rect x="140" y="40" width="60" height="200" rx="8" fill="#faf7f2" stroke="#c17f59" stroke-width="2"/><rect x="230" y="80" width="50" height="160" rx="6" fill="#d4e0d4" stroke="#8fa98f" stroke-width="2"/></svg></div><div class="product-body"><h3>Botanical Bliss Trio</h3><div class="product-rating">★★★★★ (124)</div><div class="product-price">48.00 AED</div></div></div></a>
+      <a href="calm-collection-set.html" style="text-decoration:none;color:inherit;"><div class="product-card"><div class="product-img"><svg viewBox="0 0 400 280"><rect width="400" height="280" fill="#d4e0d4"/><rect x="140" y="40" width="70" height="120" rx="10" fill="#faf7f2" stroke="#8fa98f" stroke-width="2"/><rect x="230" y="80" width="55" height="90" rx="8" fill="#f5e6dc" stroke="#c17f59" stroke-width="2"/></svg></div><div class="product-body"><h3>Calm Collection Set</h3><div class="product-rating">★★★★☆ (67)</div><div class="product-price">65.00 AED</div></div></div></a>
+      <a href="diy-wax-flower-kit.html" style="text-decoration:none;color:inherit;"><div class="product-card"><div class="product-img"><svg viewBox="0 0 400 280"><rect width="400" height="280" fill="#faf7f2"/><circle cx="200" cy="140" r="65" fill="#fae8dc" stroke="#d4a574" stroke-width="1.5"/><circle cx="160" cy="110" r="28" fill="#f5f0e8"/><circle cx="240" cy="110" r="28" fill="#f5e6dc"/></svg></div><div class="product-body"><h3>DIY Wax Flower Kit</h3><div class="product-rating">★★★★★ (203)</div><div class="product-price">120.00 AED</div></div></div></a>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand"><h3>Nature <span>Nest</span></h3><p>Handcrafted wax creations, made in small batches with pure, natural ingredients.</p></div>
+    <div class="footer-col"><h4>Shop</h4><ul><li><a href="botanical-bliss-trio.html">Candles</a></li><li><a href="wax-rose-bouquet.html">Wax Flowers</a></li><li><a href="diy-wax-flower-kit.html">DIY Kits</a></li></ul></div>
+    <div class="footer-col"><h4>Blog</h4><ul><li><a href="../blog/what-is-wax.html">What is Wax?</a></li><li><a href="../blog/scented-candles-guide.html">Scented Candles</a></li><li><a href="../blog/how-candles-are-made.html">How Candles Are Made</a></li></ul></div>
+    <div class="footer-col"><h4>Connect</h4><ul><li><a href="https://www.instagram.com/naturenest0001">Instagram</a></li><li><a href="#">Contact Us</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>© 2026 Nature Nest. Handcrafted in Dubai, UAE.</p><div class="footer-social"><a href="https://www.instagram.com/naturenest0001">📷</a><a href="#">📌</a><a href="#">🎵</a></div></div>
+</footer>
+<div class="toast" id="toast"></div>
+<script>
+const nav=document.getElementById('nav');window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>50)});
+document.querySelectorAll('.fade-in').forEach(el=>{new IntersectionObserver((e)=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:0.15}).observe(el)});
+let t;function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(t);t=setTimeout(()=>e.classList.remove('show'),2500)}
+</script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Botanical Bliss Trio — Nature Nest</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.product-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; max-width: 1200px; margin: 0 auto; padding: 2rem; align-items: center; }
+.product-gallery { background: linear-gradient(135deg, var(--cream-warm), var(--beige)); border-radius: var(--radius-xl); padding: 3rem; display: flex; align-items: center; justify-content: center; min-height: 450px; }
+.product-info h1 { margin-bottom: 0.5rem; }
+.product-info .price { font-size: 2rem; color: var(--green-deep); font-family: 'Playfair Display', serif; font-weight: 600; margin: 1rem 0; }
+.product-info .desc { font-size: 1.1rem; color: #555; line-height: 1.8; margin-bottom: 1.5rem; }
+.product-meta { display: flex; gap: 2rem; margin: 1.5rem 0; flex-wrap: wrap; }
+.product-meta-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: #666; }
+.product-meta-item .icon { font-size: 1.2rem; }
+.specs { background: var(--white); border-radius: var(--radius-lg); padding: 2rem; margin: 2rem 0; box-shadow: var(--shadow-soft); }
+.specs h3 { color: var(--green-deep); margin-bottom: 1rem; }
+.specs ul { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+.specs li { font-size: 0.9rem; color: #555; padding-left: 1.2rem; position: relative; }
+.specs li::before { content: '🌿'; position: absolute; left: -0.2rem; }
+.qty-selector { display: flex; align-items: center; gap: 1rem; margin: 1.5rem 0; }
+.qty-selector button { width: 36px; height: 36px; border: 1px solid #ddd; background: white; border-radius: 50%; font-size: 1.2rem; cursor: pointer; transition: var(--transition); }
+.qty-selector button:hover { border-color: var(--green-deep); color: var(--green-deep); }
+.qty-selector span { font-size: 1.1rem; font-weight: 600; min-width: 30px; text-align: center; }
+.related { max-width: 1200px; margin: 4rem auto; padding: 0 2rem; }
+.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+@media (max-width: 768px) { .product-hero { grid-template-columns: 1fr; } .specs ul { grid-template-columns: 1fr; } .related-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="../index.html" class="nav-brand">Nature <span>Nest</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../index.html#featured">Shop</a></li>
+    <li><a href="../blog/what-is-wax.html">Blog</a></li>
+    <li><a href="https://www.instagram.com/naturenest0001" target="_blank" rel="noopener">📷 Instagram</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-icon">🔍</button>
+    <button class="btn-icon cart-count" onclick="toast('Cart coming soon!')">🛒</button>
+    <div class="user-avatar">A</div>
+  </div>
+</nav>
+
+<div class="page-content">
+  <div class="breadcrumbs"><a href="../index.html">Home</a> / <a href="../index.html#featured">Shop</a> / <span>Botanical Bliss Trio</span></div>
+
+  <div class="product-hero">
+    <div class="product-gallery fade-in">
+      <svg viewBox="0 0 450 400" xmlns="http://www.w3.org/2000/svg">
+        <defs><radialGradient id="bg" cx="50%" cy="50%"><stop offset="0%" stop-color="#f5f0e8"/><stop offset="100%" stop-color="#e8d5c4"/></radialGradient></defs>
+        <rect width="450" height="400" fill="url(#bg)" rx="20"/>
+        <rect x="130" y="30" width="70" height="240" rx="10" fill="#faf7f2" stroke="#c17f59" stroke-width="2"/>
+        <ellipse cx="165" cy="30" rx="35" ry="10" fill="#f5e6dc"/>
+        <line x1="165" y1="30" x2="165" y2="-5" stroke="#c17f59" stroke-width="2"/>
+        <ellipse cx="165" cy="-5" rx="8" ry="14" fill="#e8b86d" opacity="0.9"/>
+        <ellipse cx="165" cy="-7" rx="4" ry="8" fill="#f5d89a"/>
+        <path d="M135 35 Q133 80 136 130" fill="none" stroke="#e8d5c4" stroke-width="3" opacity="0.6"/>
+        <rect x="230" y="70" width="55" height="200" rx="8" fill="#d4e0d4" stroke="#8fa98f" stroke-width="2"/>
+        <ellipse cx="257.5" cy="70" rx="27.5" ry="8" fill="#c0d4c0"/>
+        <line x1="257.5" y1="70" x2="257.5" y2="35" stroke="#2d5a3f" stroke-width="2"/>
+        <ellipse cx="257.5" cy="35" rx="6" ry="10" fill="#e8b86d" opacity="0.85"/>
+        <rect x="310" y="110" width="45" height="150" rx="6" fill="#f5e6dc" stroke="#d4a574" stroke-width="1.5"/>
+        <ellipse cx="332.5" cy="110" rx="22.5" ry="7" fill="#e8d5c4"/>
+        <line x1="332.5" y1="110" x2="332.5" y2="78" stroke="#d4a574" stroke-width="2"/>
+        <ellipse cx="332.5" cy="78" rx="5" ry="9" fill="#e8b86d" opacity="0.8"/>
+        <g transform="translate(390,340)"><circle cx="0" cy="-8" r="22" fill="#faf7f2" stroke="#d4a574" stroke-width="1"/><circle cx="16" cy="-16" r="15" fill="#f5f0e8"/><circle cx="-16" cy="-16" r="15" fill="#f5f0e8"/><circle cx="16" cy="4" r="15" fill="#f5f0e8"/><circle cx="-16" cy="4" r="15" fill="#f5f0e8"/><circle cx="0" cy="-8" r="9" fill="#e8b86d" opacity="0.7"/></g>
+        <text x="50" y="370" font-family="'Cormorant Garamond',serif" font-size="22" font-style="italic" fill="#c17f59" opacity="0.5">Botanical Bliss</text>
+      </svg>
+    </div>
+    <div class="product-info fade-in">
+      <span class="tag" style="font-size:0.8rem;color:var(--terracotta);text-transform:uppercase;letter-spacing:0.1em;font-weight:500;">Bestseller</span>
+      <h1>Botanical Bliss Trio</h1>
+      <div class="product-rating" style="font-size:0.9rem;">★★★★★ <span style="color:#999;font-weight:400;">(124 reviews)</span></div>
+      <div class="price">48.00 AED</div>
+      <p class="desc">Three hand-poured 100% soy wax candles infused with pure lavender, rosemary, and eucalyptus essential oils. Each burns clean for 45+ hours, filling your space with nature's most calming scents — no synthetic fragrances, no paraffin, just pure botanical warmth.</p>
+
+      <div class="product-meta">
+        <div class="product-meta-item"><span class="icon">🕯️</span> 3 × 200g candles</div>
+        <div class="product-meta-item"><span class="icon">⏱️</span> 45+ hr burn each</div>
+        <div class="product-meta-item"><span class="icon">🌿</span> 100% soy wax</div>
+        <div class="product-meta-item"><span class="icon">📦</span> Free shipping over 75 AED</div>
+      </div>
+
+      <div class="qty-selector">
+        <button onclick="changeQty(-1)">−</button>
+        <span id="qty">1</span>
+        <button onclick="changeQty(1)">+</button>
+      </div>
+
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <button class="btn btn-primary" onclick="toast('Added Botanical Bliss Trio to cart! 🕯️')">Add to Cart</button>
+        <button class="btn btn-outline" onclick="toast('Saved to wishlist! ♥')">♡ Wishlist</button>
+      </div>
+
+      <div class="specs">
+        <h3>What's Inside</h3>
+        <ul>
+          <li>Lavender &amp; Rosemary candle — calming herbal blend</li>
+          <li>Eucalyptus &amp; Mint candle — refreshing &amp; clarifying</li>
+          <li>Wild Lavender candle — pure floral serenity</li>
+          <li>Lead-free cotton wicks — clean, even burn</li>
+          <li>Reusable glass jars with bamboo lids</li>
+          <li>Hand-poured in small batches in Dubai</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="related">
+    <div class="section-header"><span class="tag">You May Also Like</span><h2>Related Products</h2></div>
+    <div class="related-grid">
+      <a href="calm-collection-set.html" style="text-decoration:none;color:inherit;">
+        <div class="product-card"><div class="product-img">
+          <svg viewBox="0 0 400 280"><rect width="400" height="280" fill="#d4e0d4"/><rect x="140" y="40" width="70" height="120" rx="10" fill="#faf7f2" stroke="#8fa98f" stroke-width="2"/><rect x="230" y="80" width="55" height="90" rx="8" fill="#f5e6dc" stroke="#c17f59" stroke-width="2"/></svg>
+        </div><div class="product-body"><h3>Calm Collection Set</h3><div class="product-rating">★★★★☆ (67)</div><div class="product-price">65.00 AED</div></div></div>
+      </a>
+      <a href="wax-rose-bouquet.html" style="text-decoration:none;color:inherit;">
+        <div class="product-card"><div class="product-img">
+          <svg viewBox="0 0 400 280"><rect width="400" height="280" fill="#f5e6dc"/><circle cx="200" cy="140" r="70" fill="#fae8dc" stroke="#d4a574" stroke-width="2"/><circle cx="200" cy="140" r="45" fill="#f5d5c5"/><circle cx="200" cy="140" r="22" fill="#e8b86d" opacity="0.7"/></svg>
+        </div><div class="product-body"><h3>Wax Rose Bouquet</h3><div class="product-rating">★★★★★ (89)</div><div class="product-price">95.00 AED</div></div></div>
+      </a>
+      <a href="diy-wax-flower-kit.html" style="text-decoration:none;color:inherit;">
+        <div class="product-card"><div class="product-img">
+          <svg viewBox="0 0 400 280"><rect width="400" height="280" fill="#faf7f2"/><circle cx="200" cy="140" r="65" fill="#fae8dc" stroke="#d4a574" stroke-width="1.5"/><circle cx="160" cy="110" r="28" fill="#f5f0e8"/><circle cx="240" cy="110" r="28" fill="#f5e6dc"/><circle cx="200" cy="170" r="26" fill="#f5f0e8"/><circle cx="200" cy="140" r="12" fill="#e8b86d" opacity="0.7"/></svg>
+        </div><div class="product-body"><h3>DIY Wax Flower Kit</h3><div class="product-rating">★★★★★ (203)</div><div class="product-price">120.00 AED</div></div></div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand"><h3>Nature <span>Nest</span></h3><p>Handcrafted wax creations, made in small batches with pure, natural ingredients. Every piece tells a story of warmth, care, and the quiet beauty of nature.</p></div>
+    <div class="footer-col"><h4>Shop</h4><ul><li><a href="#">Candles</a></li><li><a href="wax-rose-bouquet.html">Wax Flowers</a></li><li><a href="diy-wax-flower-kit.html">DIY Kits</a></li><li><a href="#">Gift Sets</a></li></ul></div>
+    <div class="footer-col"><h4>Blog</h4><ul><li><a href="../blog/what-is-wax.html">What is Wax?</a></li><li><a href="../blog/scented-candles-guide.html">Scented Candles</a></li><li><a href="../blog/scents-for-waxing.html">Waxing Scents</a></li><li><a href="../blog/how-candles-are-made.html">How Candles Are Made</a></li></ul></div>
+    <div class="footer-col"><h4>Connect</h4><ul><li><a href="https://www.instagram.com/naturenest0001" target="_blank">Instagram</a></li><li><a href="#">Contact Us</a></li><li><a href="#">Shipping & Returns</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>© 2026 Nature Nest. Handcrafted in Dubai, UAE.</p><div class="footer-social"><a href="https://www.instagram.com/naturenest0001">📷</a><a href="#">📌</a><a href="#">🎵</a></div></div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const nav=document.getElementById('nav');window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>50)});
+document.querySelectorAll('.fade-in').forEach(el=>{new IntersectionObserver((e)=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:0.15}).observe(el)});
+let t;function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(t);t=setTimeout(()=>e.classList.remove('show'),2500)}
+let q=1;function changeQty(d){q=Math.max(1,q+d);document.getElementById('qty').textContent=q}
+</script>
+</body>
+</html>
