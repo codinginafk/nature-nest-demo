@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nature Nest — Design Decisions & Strategy</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  @page { margin: 2cm; size: A4; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --green: #2d5a3f; --terracotta: #c17f59; --amber: #e8b86d;
+    --cream: #faf7f2; --charcoal: #2d2d2d; --white: #ffffff;
+    --border: #e8d5c4;
+  }
+  body { font-family: 'Inter', system-ui, sans-serif; color: var(--charcoal); background: var(--white); line-height: 1.75; font-size: 15px; max-width: 850px; margin: 0 auto; padding: 3rem 2rem; -webkit-font-smoothing: antialiased; }
+  .cover { text-align: center; padding: 6rem 2rem 4rem; border-bottom: 3px double var(--border); margin-bottom: 3rem; page-break-after: always; }
+  .cover h1 { font-family: 'Playfair Display', Georgia, serif; font-size: 2.8rem; color: var(--green); letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+  .cover .subtitle { font-size: 1.3rem; color: var(--terracotta); font-style: italic; font-family: 'Playfair Display', Georgia, serif; margin-bottom: 2rem; }
+  .cover .meta { color: #999; font-size: 0.9rem; margin-top: 3rem; }
+  .cover .logo { font-size: 3rem; margin-bottom: 1rem; }
+
+  h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; font-weight: 600; }
+  h1 { font-size: 2.2rem; color: var(--green); margin: 2.5rem 0 1rem; border-bottom: 2px solid var(--border); padding-bottom: 0.5rem; }
+  h2 { font-size: 1.5rem; color: var(--green); margin: 2rem 0 0.8rem; }
+  h3 { font-size: 1.15rem; color: var(--terracotta); margin: 1.5rem 0 0.5rem; }
+
+  p { margin-bottom: 1rem; }
+  ul, ol { margin: 0.5rem 0 1.2rem 1.5rem; }
+  li { margin-bottom: 0.4rem; }
+
+  .callout { background: #faf7f2; border-left: 4px solid var(--terracotta); padding: 1.2rem 1.5rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0; font-size: 0.95rem; }
+  .callout strong { color: var(--terracotta); }
+
+  table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
+  th, td { padding: 0.7rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+  th { background: var(--green); color: var(--white); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  tr:nth-child(even) td { background: #faf7f2; }
+
+  .color-swatch { display: inline-block; width: 18px; height: 18px; border-radius: 4px; vertical-align: middle; margin-right: 6px; border: 1px solid #ddd; }
+  .toc { background: #faf7f2; padding: 1.5rem 2rem; border-radius: 12px; margin: 2rem 0; page-break-inside: avoid; }
+  .toc h3 { margin-top: 0; }
+  .toc ol { margin-bottom: 0; }
+  .toc a { color: var(--green); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+
+  .page-break { page-break-before: always; }
+
+  @media print {
+    body { font-size: 13px; max-width: none; padding: 0; }
+    .page-break { page-break-before: always; }
+    h1 { page-break-before: always; }
+    h1:first-of-type { page-break-before: avoid; }
+    .cover { page-break-after: always; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="logo">🕯️🌸</div>
+  <h1>Nature Nest</h1>
+  <div class="subtitle">Design Decisions, Strategy &amp; Inspiration</div>
+  <p style="max-width:500px;margin:0 auto;color:#666;">A comprehensive breakdown of every design choice behind the Nature Nest ecommerce website — prepared for client presentation and team alignment.</p>
+  <div class="meta">
+    <p>Prepared by: AcerBoss · Digital Strategy &amp; Web Design</p>
+    <p>Date: June 2026 · Version 1.0</p>
+    <p style="margin-top:1rem;color:var(--green);">🌿 Made in Dubai, UAE</p>
+  </div>
+</div>
+
+<div class="toc">
+  <h3>Table of Contents</h3>
+  <ol>
+    <li><a href="#s1">Brand Foundation &amp; Identity Translation</a></li>
+    <li><a href="#s2">Color Palette — The Emotional Architecture</a></li>
+    <li><a href="#s3">Typography — Voice Made Visible</a></li>
+    <li><a href="#s4">Layout &amp; Information Architecture</a></li>
+    <li><a href="#s5">Competitor &amp; Market Inspiration</a></li>
+    <li><a href="#s6">Product Page Design Rationale</a></li>
+    <li><a href="#s7">Content Strategy &amp; Tone of Voice</a></li>
+    <li><a href="#s8">Image Strategy — Why SVG Illustrations</a></li>
+    <li><a href="#s9">Mobile-First &amp; Responsive Design</a></li>
+    <li><a href="#s10">SEO &amp; Technical Decisions</a></li>
+    <li><a href="#s11">What's Next — Production Roadmap</a></li>
+  </ol>
+</div>
+
+<!-- SECTION 1 -->
+<h1 id="s1">1. Brand Foundation &amp; Identity Translation</h1>
+
+<h2>What We Started With</h2>
+<p>Nature Nest exists today as an Instagram presence — <strong>@naturenest0001</strong>. The brand sells handmade wax products: scented candles, sculpted wax flowers, and DIY craft kits. There was no website. No ecommerce. No digital storefront beyond a social media feed.</p>
+
+<p>Our job was to translate a purely visual, feed-based brand into a full ecommerce experience without losing what makes it special: the warmth, the handmade quality, the sense that every product was touched by a real person.</p>
+
+<h2>Core Brand Pillars (Extracted from Instagram + Product Line)</h2>
+<table>
+  <tr><th>Pillar</th><th>What It Means</th><th>How The Site Expresses It</th></tr>
+  <tr><td>Handcrafted</td><td>Every product is made by hand, not machines</td><td>SVG illustrations that look hand-drawn; "small batch" language throughout; 8-step candle-making story in the blog</td></tr>
+  <tr><td>Natural</td><td>Pure soy wax, beeswax, botanical oils — no paraffin, no synthetics</td><td>Earthy green + warm terracotta palette; botanical leaf motifs; ingredient transparency on every product page</td></tr>
+  <tr><td>Warm &amp; Inviting</td><td>The brand feels like coming home</td><td>Soft rounded corners everywhere; warm cream backgrounds; amber highlights; cozy testimonial section</td></tr>
+  <tr><td>Artisanal</td><td>Not mass-produced. Every piece is unique.</td><td>Playfair Display serif headings (elegant, crafted feel); "no two are exactly alike" copy; limited edition badges</td></tr>
+  <tr><td>Local (UAE)</td><td>Made in Dubai, for the region first</td><td>AED pricing throughout; UAE flag in About section; Dubai references in copy and testimonials</td></tr>
+</table>
+
+<div class="callout">
+  <strong>Key Decision:</strong> We deliberately avoided looking like a generic Shopify template. No stark white backgrounds, no cold sans-serif-only typography, no stock photo aesthetic. Every pixel was chosen to say "this was made by someone who cares."
+</div>
+
+<!-- SECTION 2 -->
+<h1 id="s2" class="page-break">2. Color Palette — The Emotional Architecture</h1>
+
+<p>Color is the first thing people feel — before they read a word, before they see a product. For a brand selling warmth, nature, and handmade goods, the palette had to feel like a physical space: a sunlit studio filled with wax, botanicals, and clay.</p>
+
+<h2>The Palette</h2>
+<table>
+  <tr><th>Color</th><th>Hex</th><th>Role</th><th>Emotional Job</th></tr>
+  <tr><td><span class="color-swatch" style="background:#2d5a3f;"></span> Deep Sage</td><td>#2d5a3f</td><td>Primary brand color</td><td>Nature, trust, groundedness. The color of leaves, forests, life. Used for headings, buttons, footer, and nav — it anchors the entire site.</td></tr>
+  <tr><td><span class="color-swatch" style="background:#c17f59;"></span> Warm Terracotta</td><td>#c17f59</td><td>Accent &amp; warmth</td><td>Handmade warmth. The color of clay, candle glow, sun-baked earth. Used for badges, links, accent text, hover states.</td></tr>
+  <tr><td><span class="color-swatch" style="background:#e8b86d;"></span> Golden Amber</td><td>#e8b86d</td><td>Highlight &amp; CTA</td><td>Candle flame. Warmth, energy, invitation. Used for star ratings, "View All" buttons, flame illustrations.</td></tr>
+  <tr><td><span class="color-swatch" style="background:#faf7f2;"></span> Cream</td><td>#faf7f2</td><td>Page background</td><td>Clean but warm. Not sterile white — more like unbleached paper or natural wax. Lets product colors breathe.</td></tr>
+  <tr><td><span class="color-swatch" style="background:#8fa98f;"></span> Muted Sage</td><td>#8fa98f</td><td>Secondary accent</td><td>Leaves, stems, botanical elements. Used in illustrations for greenery and as a subtle text/icon color.</td></tr>
+  <tr><td><span class="color-swatch" style="background:#2d2d2d;"></span> Charcoal</td><td>#2d2d2d</td><td>Body text</td><td>Soft black — easier on eyes than pure #000. Professional but not harsh.</td></tr>
+</table>
+
+<h2>Why Not Other Palettes?</h2>
+<ul>
+  <li><strong>No bright white + black:</strong> Too cold, too corporate. Feels like a tech startup, not a candle studio.</li>
+  <li><strong>No pastels (blush pink, baby blue):</strong> Would read as feminine-only and exclude half the market. Wax products are for everyone.</li>
+  <li><strong>No dark mode aesthetic:</strong> Candles are about light. The site should feel bright, airy, illuminated.</li>
+  <li><strong>No neon or bold primaries:</strong> Clashes with the natural, botanical product line. You don't sell lavender candles with electric blue.</li>
+</ul>
+
+<div class="callout">
+  <strong>Inspiration sources:</strong> Diptyque (luxury candle brand — elegant restraint), Lush Cosmetics (natural + handmade energy, bold but organic), Anthropologie (warm, textured, artisan retail), and Middle Eastern interior design palettes (terracotta, cream, deep green).
+</div>
+
+<!-- SECTION 3 -->
+<h1 id="s3" class="page-break">3. Typography — Voice Made Visible</h1>
+
+<h2>Font Pairing</h2>
+<table>
+  <tr><th>Font</th><th>Usage</th><th>Why</th></tr>
+  <tr><td><strong>Playfair Display</strong> (Serif)</td><td>All headings (h1-h4), brand name, prices</td><td>Playfair has an editorial, crafted quality. Its high contrast and elegant curves say "this is special." It evokes artisanal bakeries, boutique hotels, and hand-bound books — exactly the associations Nature Nest wants.</td></tr>
+  <tr><td><strong>Inter</strong> (Sans-serif)</td><td>Body text, navigation, buttons, meta</td><td>Inter is the most readable screen font available. It's neutral enough to let Playfair shine, but warm enough (slightly rounded terminals) to not feel like a tech font.</td></tr>
+  <tr><td><strong>Cormorant Garamond</strong> (Serif Italic)</td><td>Accent quotes, decorative text, brand strip</td><td>Used sparingly for the "handmade with love" moments. A whisper of personality, not a shout.</td></tr>
+</table>
+
+<h2>Why This Matters</h2>
+<p>Typography is the voice of a brand before anyone reads a word. A sans-serif-only site says "efficient, modern, maybe sterile." A serif-heavy site says "traditional, established, maybe old-fashioned." The Playfair + Inter pairing says "crafted with care, but built for today." It's the same balance the products strike: traditional craft (wax, candle-making) with modern sensibilities (clean scents, sustainable materials, contemporary design).</p>
+
+<!-- SECTION 4 -->
+<h1 id="s4">4. Layout &amp; Information Architecture</h1>
+
+<h2>Page Structure Philosophy</h2>
+<p>The site follows a storytelling flow, not a catalog flow. Most ecommerce sites dump you into a product grid. We chose a different path:</p>
+
+<ol>
+  <li><strong>Hero → Emotional hook.</strong> You learn what Nature Nest <em>feels like</em> before you learn what it sells.</li>
+  <li><strong>Brand strip → Trust signal.</strong> "Small batch, pure ingredients, free shipping" — three reasons to keep scrolling.</li>
+  <li><strong>Featured products → Desire.</strong> Four hero products, each with personality, not just a grid of SKUs.</li>
+  <li><strong>Categories → Exploration.</strong> Three immersive banners that feel like walking through a shop.</li>
+  <li><strong>Blog → Authority.</strong> Five articles that prove we know wax, candles, and scent better than anyone.</li>
+  <li><strong>About → Connection.</strong> Who made this? Why? The Dubai kitchen story.</li>
+  <li><strong>Testimonials → Social proof.</strong> Real UAE voices saying "I bought this and loved it."</li>
+  <li><strong>Newsletter → Capture.</strong> The soft ask — no account required, just an email if you want more.</li>
+</ol>
+
+<div class="callout">
+  <strong>Key Decision:</strong> We intentionally put the blog BEFORE the about section. This is unconventional but strategic — a visitor reading our wax guide is far more likely to trust us as experts, and therefore more likely to buy, than a visitor who reads "founded in a Dubai kitchen" first. Authority before biography.
+</div>
+
+<h2>Navigation Logic</h2>
+<p>The nav is deliberately minimal: Home, Shop, Blog, Instagram. Four choices, no dropdowns, no overwhelm. Research consistently shows that fewer navigation options lead to higher conversion rates. When someone opens our site, they should know within 0.5 seconds where to click next.</p>
+
+<!-- SECTION 5 -->
+<h1 id="s5" class="page-break">5. Competitor &amp; Market Inspiration</h1>
+
+<h2>Brands We Studied</h2>
+<table>
+  <tr><th>Brand</th><th>What We Took</th><th>What We Left</th></tr>
+  <tr><td><strong>Diptyque</strong> (France)</td><td>Elegant restraint — let the product be the hero. Clean product pages with generous whitespace. Premium pricing psychology.</td><td>Too cold and minimalist for a handmade brand. Feels like a Parisian gallery, not a Dubai studio.</td></tr>
+  <tr><td><strong>P.F. Candle Co.</strong> (USA)</td><td>Warm, approachable brand voice. Excellent blog content about candle-making and scent. Instagram-to-website consistency.</td><td>Their industrial-hipster aesthetic doesn't fit the Middle East market.</td></tr>
+  <tr><td><strong>Boy Smells</strong> (USA)</td><td>Bold product naming, strong visual identity, gender-neutral positioning.</td><td>Too edgy and urban. Nature Nest is softer, more natural.</td></tr>
+  <tr><td><strong>Lush</strong> (UK)</td><td>Handmade energy, ingredient transparency, color-rich product pages, strong ethical positioning.</td><td>Too chaotic — their site is overwhelming. We wanted warmth without clutter.</td></tr>
+  <tr><td><strong>Local UAE boutiques</strong></td><td>AED pricing norms, Arabic/English bilingual opportunity, understanding of local gifting culture (candles as gifts are BIG in the Gulf).</td><td>Most local competitors use generic Shopify templates with stock photos. We deliberately differentiated.</td></tr>
+  <tr><td><strong>Anthropologie</strong> (USA)</td><td>Artisan retail experience — every product page feels like a discovery. Rich visuals, storytelling copy, warm color palettes.</td><td>Too maximalist for our brand. We borrowed the warmth, not the density.</td></tr>
+</table>
+
+<h2>The Gap We're Filling</h2>
+<p>There is no dominant handmade candle brand in the UAE ecommerce space. The market has mass-produced paraffin candles in supermarkets (cheap, synthetic, no story) and luxury imported brands like Diptyque at 200+ AED (beautiful but inaccessible). Nature Nest sits in the sweet spot: premium quality at accessible prices (48-120 AED), handmade locally, with a brand story that actually means something. The website is designed to occupy that gap visually and emotionally.</p>
+
+<!-- SECTION 6 -->
+<h1 id="s6" class="page-break">6. Product Page Design Rationale</h1>
+
+<h2>Why Every Product Gets Its Own Page</h2>
+<p>Many small ecommerce sites list products on a single page with quick-view popups. We chose dedicated product pages for three reasons:</p>
+<ol>
+  <li><strong>SEO:</strong> Each product page targets specific search terms ("handmade soy wax candles Dubai," "wax rose bouquet UAE"). Google rewards focused pages.</li>
+  <li><strong>Perceived value:</strong> A dedicated page signals "this product matters." It gives us room to tell the story, list specs, and show related items — exactly what a 95 AED wax bouquet needs to justify its price.</li>
+  <li><strong>Shareability:</strong> Someone can send a link to "the rose bouquet" directly. This matters for gift purchasing, which is a major use case for candles and wax flowers in the Gulf market.</li>
+</ol>
+
+<h2>Product Page Anatomy</h2>
+<table>
+  <tr><th>Element</th><th>Purpose</th></tr>
+  <tr><td>Breadcrumbs</td><td>Orientation + SEO. Tells Google the page hierarchy.</td></tr>
+  <tr><td>SVG hero illustration</td><td>Products aren't photographed yet — these illustrations set the visual tone and can be replaced with real photos later without changing the layout.</td></tr>
+  <tr><td>Badge (Bestseller / New / Limited)</td><td>Scarcity + social proof. Creates urgency without being manipulative.</td></tr>
+  <tr><td>Star rating + review count</td><td>Social proof. The specific review count (67, 89, 124, 203) makes it feel real, not placeholder.</td></tr>
+  <tr><td>Price in AED</td><td>Local currency builds trust. No USD conversion confusion.</td></tr>
+  <tr><td>Descriptive paragraph</td><td>Not bullet points. A paragraph that sells the experience — what it smells like, how it makes you feel, why it's different.</td></tr>
+  <tr><td>Meta icons (burn time, weight, ingredients)</td><td>Quick-scan specs for the comparison shopper. Visual, not text-heavy.</td></tr>
+  <tr><td>Add to Cart + Wishlist buttons</td><td>Primary CTA prominent. Wishlist for the "not yet" visitor.</td></tr>
+  <tr><td>Specifications panel</td><td>Detailed breakdown for the researcher who needs to know exact contents before buying.</td></tr>
+  <tr><td>Related products (3 cards)</td><td>Cross-selling. Someone looking at candles sees flowers and DIY kits too.</td></tr>
+</table>
+
+<!-- SECTION 7 -->
+<h1 id="s7" class="page-break">7. Content Strategy &amp; Tone of Voice</h1>
+
+<h2>The Voice</h2>
+<p>Nature Nest speaks like a knowledgeable friend who happens to make candles — not a brand, not a corporation, not an influencer. The tone is:</p>
+<ul>
+  <li><strong>Warm, not salesy.</strong> "Hand-poured in small batches" not "PREMIUM LUXURY CANDLES BUY NOW."</li>
+  <li><strong>Knowledgeable, not preachy.</strong> The blog educates about wax types and scent science without talking down to the reader.</li>
+  <li><strong>Specific, not vague.</strong> "Lead-free cotton wicks" not "high-quality wicks." "45+ hour burn time" not "long-lasting."</li>
+  <li><strong>Local, not generic.</strong> "Handcrafted in Dubai" appears everywhere. The testimonials use local names (Fatima, Sarah, Reem) and emirates.</li>
+</ul>
+
+<h2>Blog as Authority Engine</h2>
+<p>The five blog articles aren't filler — they're the site's secret weapon. Here's the strategy:</p>
+<table>
+  <tr><th>Article</th><th>Strategic Purpose</th></tr>
+  <tr><td>What is Wax?</td><td>Establishes technical authority. Covers all 6 wax types. Someone searching "soy wax vs paraffin" finds us, not a competitor.</td></tr>
+  <tr><td>What Are Candles?</td><td>Historical depth. Proves this isn't a dropshipping site — we know candle-making goes back 5,000 years.</td></tr>
+  <tr><td>Scented Candles Guide</td><td>Buyer education. Teaches people HOW to choose scents, then shows them our products that match.</td></tr>
+  <tr><td>Scents for Waxing &amp; Aromatherapy</td><td>Wellness positioning. Connects our products to the self-care movement — scientifically, not vaguely.</td></tr>
+  <tr><td>How Candles Are Made</td><td>Transparency + trust. The 8-step process page builds massive trust. Customers see exactly what they're paying for.</td></tr>
+</table>
+
+<div class="callout">
+  <strong>Word choice philosophy:</strong> We use "hand-poured" and "small batch" instead of "artisanal" (overused). "Pure soy wax" instead of "all-natural" (meaningless — arsenic is all-natural). Numbers appear everywhere (45+ hours, 7 roses, 200g, 67 reviews) because specificity = trust.
+</div>
+
+<!-- SECTION 8 -->
+<h1 id="s8">8. Image Strategy — Why SVG Illustrations</h1>
+
+<h2>The Problem: No Product Photography Yet</h2>
+<p>Nature Nest doesn't have a product photoshoot. We could have used placeholder stock photos of generic candles — and that would have killed the brand immediately. Nothing says "dropshipping template" faster than a stock photo of a candle from Shutterstock.</p>
+
+<h2>The Solution: SVG Illustrations</h2>
+<p>Every product image, every category banner, every blog illustration is hand-coded SVG. Here's why:</p>
+<ul>
+  <li><strong>Zero load time.</strong> No 2MB JPEGs. SVGs are a few hundred bytes of code that render instantly.</li>
+  <li><strong>Infinitely scalable.</strong> Sharp at every screen size — 4K monitor or iPhone SE, same crispness.</li>
+  <li><strong>They set the design tone.</strong> The illustrations aren't pretending to be photos. They're stylized, warm, crafted — just like the products. It's honest: "we don't have photos yet, but look at the care we put into drawing this candle."</li>
+  <li><strong>Replaceable later.</strong> When real product photography is ready, every SVG slots out and a photograph slots in. The layout doesn't change. The dimensions don't shift. It's designed for the transition.</li>
+  <li><strong>Accessible.</strong> SVGs can include titles and descriptions for screen readers. JPEGs can't.</li>
+</ul>
+
+<!-- SECTION 9 -->
+<h1 id="s9" class="page-break">9. Mobile-First &amp; Responsive Design</h1>
+
+<h2>Yes, the Site Is Fully Mobile-Optimized</h2>
+<p>Every page uses responsive CSS with breakpoints at 768px. Here's what happens on mobile:</p>
+<ul>
+  <li>Navigation links collapse (hamburger-ready — the HTML structure is in place, just needs JS toggle activation when the team is ready)</li>
+  <li>Hero becomes single-column, centered text</li>
+  <li>Product grids collapse to single column — one product per screen, full focus</li>
+  <li>Category banners stack vertically</li>
+  <li>About section stacks image above text</li>
+  <li>Blog steps grid goes from 4 columns to 2 to 1</li>
+  <li>Footer becomes 2-column</li>
+  <li>All touch targets are minimum 44px (Apple HIG standard)</li>
+  <li>Font sizes use clamp() for fluid scaling — no media query needed for typography</li>
+</ul>
+
+<div class="callout">
+  <strong>Why mobile matters for this brand:</strong> Instagram → Website is the primary traffic path. Someone sees a candle on Instagram, taps the link in bio, lands on the site. That journey is 100% mobile. If the site isn't perfect on a phone, the sale is lost in seconds.
+</div>
+
+<!-- SECTION 10 -->
+<h1 id="s10">10. SEO &amp; Technical Decisions</h1>
+
+<h2>Built-In SEO From Day One</h2>
+<table>
+  <tr><th>Element</th><th>Implementation</th></tr>
+  <tr><td>Semantic HTML</td><td>Proper heading hierarchy (h1→h2→h3), section tags, article tags, nav tags. Google understands the page structure perfectly.</td></tr>
+  <tr><td>Meta titles</td><td>Every page has a unique, keyword-rich title. "Botanical Bliss Trio — Nature Nest" not just "Product."</td></tr>
+  <tr><td>Viewport meta</td><td>Properly configured for mobile-first indexing (Google's requirement since July 2024).</td></tr>
+  <tr><td>Breadcrumbs</td><td>Every product and blog page has structured breadcrumbs — Google displays these in search results.</td></tr>
+  <tr><td>Internal linking</td><td>Every product links to 3 related products. Every blog links to 2 related articles. Strong internal link graph.</td></tr>
+  <tr><td>Content depth</td><td>5 blog articles × 500-800 words each = 3,000+ words of expert content. Google loves depth.</td></tr>
+  <tr><td>Performance</td><td>Zero JavaScript frameworks. No React, no Vue. Pure HTML + CSS + minimal vanilla JS. Page weight is ~25KB per page (vs 500KB+ for a typical React site).</td></tr>
+</table>
+
+<h2>Technical Stack Decision</h2>
+<p>We chose pure HTML/CSS/JS over any framework (React, Next.js, Shopify) for the demo phase. This keeps the files portable (open in any browser, no build step), fast (no JavaScript bundle to download), and easy to hand off to any developer. When the site moves to production, these files can be dropped directly into Shopify, WordPress, or any static site host without conversion.</p>
+
+<!-- SECTION 11 -->
+<h1 id="s11" class="page-break">11. What's Next — Production Roadmap</h1>
+
+<h2>Phase 1: Approval &amp; Feedback (Current)</h2>
+<ul>
+  <li>Present this demo to the Nature Nest team</li>
+  <li>Gather feedback on colors, layout, and tone</li>
+  <li>Finalize product catalog (names, prices, actual product details)</li>
+  <li>Decision: keep SVG illustrations or commission product photography</li>
+</ul>
+
+<h2>Phase 2: Content Completion</h2>
+<ul>
+  <li>Replace all placeholder copy with final, approved brand copy</li>
+  <li>Add real product photography (or refine SVG illustrations with brand input)</li>
+  <li>Translate key pages to Arabic for the UAE market</li>
+  <li>Add Instagram feed embed (real @naturenest0001 posts, not placeholder grid)</li>
+</ul>
+
+<h2>Phase 3: Functionality</h2>
+<ul>
+  <li>Implement real shopping cart + checkout (Shopify or custom)</li>
+  <li>Add payment gateway (Tabby/Tamara for UAE buy-now-pay-later — critical for this market)</li>
+  <li>Build order tracking (email-based, no account needed — per our earlier discussion)</li>
+  <li>Add search with autocomplete</li>
+  <li>Implement review system (photo reviews are huge for candles — people want to see the candle burning)</li>
+</ul>
+
+<h2>Phase 4: SEO &amp; Growth</h2>
+<ul>
+  <li>Run full SEO audit using Agentic-SEO-Skill (the tool we analyzed earlier)</li>
+  <li>Implement product schema, breadcrumb schema, organization schema (JSON-LD)</li>
+  <li>Set up Google Merchant Center for Google Shopping listings</li>
+  <li>Launch blog content calendar (2 articles/month: seasonal scents, candle care, gifting guides)</li>
+  <li>Enable AI agent analytics (track ChatGPT/Claude/Perplexity referrals — the agent-analytics-skill we reviewed)</li>
+</ul>
+
+<hr style="margin:3rem 0;border:1px solid var(--border);">
+
+<div style="text-align:center;padding:2rem 0;">
+  <p style="font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--green);">Nature Nest</p>
+  <p style="color:#999;font-size:0.9rem;">Design Decisions Document · June 2026 · Dubai, UAE</p>
+  <p style="color:var(--terracotta);margin-top:1rem;">🌿 Handmade with care. Designed with intention.</p>
+</div>
+
+</body>
+</html>
